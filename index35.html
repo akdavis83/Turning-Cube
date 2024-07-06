@@ -1,0 +1,74 @@
+<link rel="icon" href="https://fav.farm/🔥" />
+<title>Shadow</title>
+<base href="https://docs.lume.io/" />
+<script src="./importmap.js"></script>
+
+<lume-scene webgl shadowmap-type="soft">
+	<lume-ambient-light color="white" intensity="0.7"></lume-ambient-light>
+
+	<!-- We need a plane onto which shadows will land (the "floor"). -->
+	<lume-element3d align-point="0.5 0.5" mount-point="0.5 0.5" rotation="60 0 0" size="1000 1000">
+		<lume-plane color="white" size="1500 1500" align-point="0.5 0.5" mount-point="0.5 0.5" rotation="0 0 30">
+			<!-- For simplicity, let's position the light, and a cube, relative to (as children of) the "floor". -->
+
+			<!-- A point in space that determines direction of an infinitely-far source of light. -->
+			<lume-directional-light
+				color="white"
+				position="500 -500 500"
+				intensity="1"
+				shadow-map-width="1024"
+				shadow-map-height="1024"
+			></lume-directional-light>
+
+			<!-- A box that will cast a shadow onto the floor. -->
+			<lume-box
+				id="box"
+				color="blue"
+				size="50 50 50"
+				align-point="0.5 0.5 0.5"
+				mount-point="0.5 0.5 0"
+				rotation="0 0 10"
+			></lume-box>
+
+			<!-- Add an interactive camera viewpoint. -->
+			<lume-element3d align-point="0.5 0.5" rotation="-90 0 0">
+				<lume-camera-rig vertical-angle="30" min-vertical-angle="5" distance="500"></lume-camera-rig>
+			</lume-element3d>
+		</lume-plane>
+	</lume-element3d>
+</lume-scene>
+
+<style>
+	html,
+	body {
+		margin: 0;
+		height: 100%;
+		width: 100%;
+		background: white;
+		touch-action: none;
+	}
+    .overlay-text {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 10vh;
+        z-index: 999; /* make sure it's on top of all other elements */
+        text-align: center;
+        font-size: 48px;
+        ; /* adjust the color to your liking */
+        margin-top: 50px;
+      }
+      a {
+        color: inherit;
+        text-decoration: none;
+        cursor: pointer;
+      }
+</style>
+
+<script type="module">
+	import 'lume'
+
+	box.rotation = (x, y, z) => [x, y, ++z]
+</script>
+<div class="overlay-text" style="color: blue;"><a href="https://akdavis83.github.io/Cube/">James 1:17 Every good gift and every perfect gift is from above, and cometh down from the Father of lights, with whom is no variableness, neither shadow of turning.</a></div>
